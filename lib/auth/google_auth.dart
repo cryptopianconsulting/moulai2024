@@ -23,7 +23,7 @@ Future<User?> signInWithGoogle(BuildContext context) async {
     }
 
     // For other platforms (iOS and Android), sign out if already signed in with Google
-    await signOutWithGoogle().catchError((_) => null);
+    await signOutWithGoogle();
 
     print('signOutWithGoogle done!!!');
     // Prompt the user to select a Google account to sign in
@@ -66,7 +66,7 @@ Future<User?> signInWithGoogle2(BuildContext context) async {
       return await FirebaseAuth.instance.signInWithPopup(GoogleAuthProvider());
     }
     print('catchError===========');
-    await signOutWithGoogle().catchError((_) => null);
+    await signOutWithGoogle();
     print('signInWithGoogle===========');
     final auth = await (await _googleSignIn2.signIn())?.authentication;
     if (auth == null) {

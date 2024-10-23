@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -87,7 +89,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       print('_________$finalBody');
       var response = await http.pos('sign_up', finalBody);
-      print('response=====${response.data}');
+      log('response=====${response.data}');
 
       // await setUserToken(response.data['data']['user']['token']);
 
@@ -215,6 +217,8 @@ class AuthProvider extends ChangeNotifier {
       }
 
       print(e.response!.statusMessage.toString());
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -262,6 +266,7 @@ class AuthProvider extends ChangeNotifier {
 
     try {
       var response = await http.get('get/question');
+      print(response);
       jobsSearch('');
       print('\nresponse.data =>\n${response.data}\n\n');
       questionsModel = GetQa.fromJson(response.data);

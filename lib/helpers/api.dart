@@ -56,6 +56,7 @@ class HttpService {
                 }))
         .catchError((onError) {
       print('onError: ${onError.toString()}');
+      return onError;
     });
   }
 
