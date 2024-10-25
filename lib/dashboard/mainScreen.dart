@@ -972,12 +972,18 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
                                                             children: [
                                                               Text(
                                                                 'Classify Possible Deductions',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                maxLines: 1,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
                                                                     .override(
                                                                       fontFamily:
                                                                           'Poppins',
+                                                                      fontSize:
+                                                                          14,
                                                                       color: Color(
                                                                           0xFFDBEBFD),
                                                                     ),
@@ -993,11 +999,15 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
                                                                       color: Color(
                                                                           0xFFA5A5A5),
                                                                       fontSize:
-                                                                          12.0,
+                                                                          11.0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w300,
                                                                     ),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                maxLines: 1,
                                                               ),
                                                             ],
                                                           ),
@@ -1156,6 +1166,8 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
                                                                     .override(
                                                                       fontFamily:
                                                                           'Poppins',
+                                                                      fontSize:
+                                                                          14,
                                                                       color: Color(
                                                                           0xFFDBEBFD),
                                                                     ),
@@ -1171,7 +1183,7 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
                                                                       color: Color(
                                                                           0xFFA5A5A5),
                                                                       fontSize:
-                                                                          12.0,
+                                                                          11.0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w300,
