@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:moulai1/auth/auth_util.dart';
 import 'package:moulai1/loader.dart';
 
 import '../models/Linkedaccounts.dart';
@@ -30,9 +33,11 @@ class _LinkedAccountsWidgetState extends State<LinkedAccountsWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LinkedAccountsModel());
-    final authProviderr = Provider.of<AuthProvider>(context, listen: false);
-    authProviderr.getUserAccounts();
+    WidgetsBinding.instance.addPostFrameCallback((t) {
+      _model = createModel(context, () => LinkedAccountsModel());
+      final authProviderr = Provider.of<AuthProvider>(context, listen: false);
+      authProviderr.getUserAccounts();
+    });
   }
 
   @override
@@ -561,8 +566,10 @@ class _LinkedAccountsWidgetState extends State<LinkedAccountsWidget> {
                             16.0, 16.0, 16.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            String? basiqUrl =
-                                await authProvider.getBasiqURL(context);
+                            String? basiqUrl = await authProvider.getBasiqURL(
+                                context,
+                                phoneNumber: currentPhoneNumber);
+
                             await Navigator.push(
                               context,
                               MaterialPageRoute(

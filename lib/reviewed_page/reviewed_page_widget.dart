@@ -30,18 +30,20 @@ class _ReviewedPageWidgetState extends State<ReviewedPageWidget> {
   @override
   void initState() {
     super.initState();
-    var authProviderr = Provider.of<AuthProvider>(context, listen: false);
-    authProviderr.getCategoriesedTransactions(context, init: true);
-    loading = false;
-    setState(() {});
+    WidgetsBinding.instance.addPostFrameCallback((t) {
+      var authProviderr = Provider.of<AuthProvider>(context, listen: false);
+      authProviderr.getCategoriesedTransactions(context, init: true);
+      loading = false;
+      setState(() {});
 
-    // authProviderr.categoriesedTransactions!.data!.forEach((element) {
-    //   itemsCount += element.transactions!.length;
-    // });
-    setState(() {});
+      // authProviderr.categoriesedTransactions!.data!.forEach((element) {
+      //   itemsCount += element.transactions!.length;
+      // });
+      setState(() {});
 
-    authProviderr.notifyListeners();
-    _model = createModel(context, () => ReviewedPageModel());
+      authProviderr.notifyListeners();
+      _model = createModel(context, () => ReviewedPageModel());
+    });
   }
 
   @override

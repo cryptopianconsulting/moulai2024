@@ -39,19 +39,21 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   @override
   void initState() {
     super.initState();
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    DashbaordMainScreen();
-    AllExpensesWidget();
-    ProfileWidget();
-    authProvider.TransactionsGet();
-    authProvider.LaterTransactionsGet();
-    authProvider.getAmountsDeductions();
-    authProvider.getpercent();
+    WidgetsBinding.instance.addPostFrameCallback((t) {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      DashbaordMainScreen();
+      AllExpensesWidget();
+      ProfileWidget();
+      authProvider.TransactionsGet();
+      authProvider.LaterTransactionsGet();
+      authProvider.getAmountsDeductions();
+      authProvider.getpercent();
 
-    authProvider.getCategoriesedTransactions(context, init: true);
+      authProvider.getCategoriesedTransactions(context, init: true);
 
-    // await Future.delayed(Duration(seconds: 1));
-    setState(() {});
+      // await Future.delayed(Duration(seconds: 1));
+      setState(() {});
+    });
     // _model = createModel(context, () => DashboardModel());
   }
 

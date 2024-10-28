@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:moulai1/loader.dart';
 import 'package:provider/provider.dart';
@@ -241,7 +243,7 @@ class _AllExpensesWidgetState extends State<AllExpensesWidget> {
                                                                         23))),
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           horizontal: 12.0,
                                                           vertical: 14),
                                                       child: Row(
@@ -746,6 +748,7 @@ class _AllExpensesWidgetState extends State<AllExpensesWidget> {
                         //   '${authProviderr.Transactionsitems!.data!.length}',
                         //   style: TextStyle(color: Colors.white),
                         // ),
+                        //TABS
                         Container(
                           height: MediaQuery.of(context).size.height * .05,
                           child: ListView.builder(
@@ -759,15 +762,16 @@ class _AllExpensesWidgetState extends State<AllExpensesWidget> {
                                 // print(item.deduction);
 
                                 return GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     if (item ==
                                         authProviderr.deduction_status) {
                                       authProviderr.deduction_status = '';
-                                      authProviderr.TransactionsGet();
+                                      await authProviderr.TransactionsGet();
                                     } else {
-                                      print('deduction_status: ${item.toString()}');
+                                      print(
+                                          'deduction_status: ${item.toString()}');
                                       authProviderr.deduction_status = item;
-                                      authProviderr.TransactionsGet();
+                                      await authProviderr.TransactionsGet();
                                     }
                                   },
                                   child: Align(
@@ -859,90 +863,144 @@ class _AllExpensesWidgetState extends State<AllExpensesWidget> {
                                                                 left: 9,
                                                                 top: 10,
                                                                 bottom: 10),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                item.deductionStatus ==
-                                                                            '' ||
-                                                                        item.deductionStatus ==
-                                                                            'LATER'
-                                                                    ? Container(
-                                                                        margin: EdgeInsets.only(
-                                                                            left:
-                                                                                5),
-                                                                        child: Image
-                                                                            .asset(
-                                                                          'assets/images/pendingTransactionIcon.png',
-                                                                          width:
-                                                                              23.0,
-                                                                          height:
-                                                                              23.0,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                      )
-                                                                    : item.deductionStatus ==
-                                                                            'POSSIBLE'
-                                                                        ? Container(
-                                                                            margin:
-                                                                                EdgeInsets.only(left: 5),
-                                                                            child:
-                                                                                Image.asset(
-                                                                              'assets/images/possible.png',
-                                                                              width: 23.0,
-                                                                              height: 23.0,
-                                                                              fit: BoxFit.cover,
-                                                                            ),
-                                                                          )
-                                                                        : item.deductionStatus ==
-                                                                                'NON-POSSIBLE'
-                                                                            ? Container(
-                                                                                margin: EdgeInsets.only(left: 5),
-                                                                                child: Image.asset(
-                                                                                  'assets/images/non_possible.png',
-                                                                                  width: 23.0,
-                                                                                  height: 23.0,
-                                                                                  fit: BoxFit.cover,
-                                                                                ),
-                                                                              )
-                                                                            : item.deductionStatus == 'DEDUCTION'
-                                                                                ? Icon(
-                                                                                    Icons.check_circle,
-                                                                                    color: Color(0xFFBEF397),
-                                                                                    size: 22.0,
-                                                                                  )
-                                                                                : item.deductionStatus == 'NON-DEDUCTION'
-                                                                                    ? Container(
-                                                                                        margin: EdgeInsets.only(left: 5),
-                                                                                        child: Image.asset(
-                                                                                          'assets/images/nonDeductionTransaction.png',
-                                                                                          width: 25.0,
-                                                                                          height: 25.0,
-                                                                                          fit: BoxFit.cover,
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  item.deductionStatus ==
+                                                                              '' ||
+                                                                          item.deductionStatus ==
+                                                                              'LATER'
+                                                                      ? Container(
+                                                                          margin:
+                                                                              EdgeInsets.only(left: 5),
+                                                                          child:
+                                                                              Image.asset(
+                                                                            'assets/images/pendingTransactionIcon.png',
+                                                                            width:
+                                                                                23.0,
+                                                                            height:
+                                                                                23.0,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          ),
+                                                                        )
+                                                                      : item.deductionStatus ==
+                                                                              'POSSIBLE'
+                                                                          ? Container(
+                                                                              margin: EdgeInsets.only(left: 5),
+                                                                              child: Image.asset(
+                                                                                'assets/images/possible.png',
+                                                                                width: 23.0,
+                                                                                height: 23.0,
+                                                                                fit: BoxFit.cover,
+                                                                              ),
+                                                                            )
+                                                                          : item.deductionStatus == 'NON-POSSIBLE'
+                                                                              ? Container(
+                                                                                  margin: EdgeInsets.only(left: 5),
+                                                                                  child: Image.asset(
+                                                                                    'assets/images/non_possible.png',
+                                                                                    width: 23.0,
+                                                                                    height: 23.0,
+                                                                                    fit: BoxFit.cover,
+                                                                                  ),
+                                                                                )
+                                                                              : item.deductionStatus == 'DEDUCTION'
+                                                                                  ? Icon(
+                                                                                      Icons.check_circle,
+                                                                                      color: Color(0xFFBEF397),
+                                                                                      size: 22.0,
+                                                                                    )
+                                                                                  : item.deductionStatus == 'NON-DEDUCTION'
+                                                                                      ? Container(
+                                                                                          margin: EdgeInsets.only(left: 5),
+                                                                                          child: Image.asset(
+                                                                                            'assets/images/nonDeductionTransaction.png',
+                                                                                            width: 25.0,
+                                                                                            height: 25.0,
+                                                                                            fit: BoxFit.cover,
+                                                                                          ),
+                                                                                        )
+                                                                                      : Icon(
+                                                                                          Icons.check_circle,
+                                                                                          color: Color(0xFFBEF397),
+                                                                                          size: 24.0,
                                                                                         ),
-                                                                                      )
-                                                                                    : Icon(
-                                                                                        Icons.check_circle,
-                                                                                        color: Color(0xFFBEF397),
-                                                                                        size: 24.0,
-                                                                                      ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Column(
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            12.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        // item.deduction ==
+                                                                        //         1
+                                                                        //     ? Container()
+                                                                        //     :
+                                                                        Container(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width * .45,
+                                                                          child:
+                                                                              Text(
+                                                                            item.merchantBusinessName.toString(),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontSize: 14,
+                                                                                  fontFamily: 'Poppins',
+                                                                                  color: FlutterFlowTheme.of(context).primaryBtnText,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                        item.postDate ==
+                                                                                null
+                                                                            ? Container()
+                                                                            : Text(
+                                                                                formattedDatee.format(DateTime.parse(item.postDate!.toString())).toString(),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Poppins',
+                                                                                      color: Color(0xFFA5A5A5),
+                                                                                      fontSize: 13.0,
+                                                                                    ),
+                                                                              ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Column(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
@@ -950,120 +1008,61 @@ class _AllExpensesWidgetState extends State<AllExpensesWidget> {
                                                                         CrossAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      // item.deduction ==
-                                                                      //         1
-                                                                      //     ? Container()
-                                                                      //     :
-                                                                      Container(
-                                                                        width: MediaQuery.of(context).size.width *
-                                                                            .45,
-                                                                        child:
-                                                                            Text(
-                                                                          item.merchantBusinessName
-                                                                              .toString(),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontSize: 14,
-                                                                                fontFamily: 'Poppins',
-                                                                                color: FlutterFlowTheme.of(context).primaryBtnText,
-                                                                              ),
-                                                                        ),
+                                                                      Text(
+                                                                        '${formatCurrency.format(item.amount)}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Poppins',
+                                                                              color: FlutterFlowTheme.of(context).primaryBtnText,
+                                                                            ),
                                                                       ),
-                                                                      item.postDate ==
-                                                                              null
+                                                                      item.deduction ==
+                                                                              1
                                                                           ? Container()
-                                                                          : Text(
-                                                                              formattedDatee.format(DateTime.parse(item.postDate!.toString())).toString(),
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Poppins',
-                                                                                    color: Color(0xFFA5A5A5),
-                                                                                    fontSize: 13.0,
-                                                                                  ),
+                                                                          : Container(
+                                                                              width: MediaQuery.of(context).size.width * .25,
+                                                                              child: Text(
+                                                                                item.deduction!.subdivisionTitle.toString(),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(fontFamily: 'Poppins', color: Color(0xFFA5A5A5), fontSize: 11.0),
+                                                                              ),
                                                                             ),
                                                                     ],
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      '${formatCurrency.format(item.amount)}',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Poppins',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryBtnText,
-                                                                          ),
-                                                                    ),
-                                                                    item.deduction ==
-                                                                            1
-                                                                        ? Container()
-                                                                        : Container(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width * .25,
-                                                                            child:
-                                                                                Text(
-                                                                              item.deduction!.subdivisionTitle.toString(),
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(fontFamily: 'Poppins', color: Color(0xFFA5A5A5), fontSize: 11.0),
+                                                                  IconButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      if (item.deduction ==
+                                                                          1) {
+                                                                      } else {
+                                                                        print(
+                                                                            'item: ${item.id}');
+                                                                        Navigator
+                                                                            .push(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                            builder: (_) =>
+                                                                                MoreInforWidget(
+                                                                              item: item,
                                                                             ),
                                                                           ),
-                                                                  ],
-                                                                ),
-                                                                IconButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    if (item.deduction ==
-                                                                        1) {
-                                                                    } else {
-                                                                      print(
-                                                                          'item: ${item.id}');
-                                                                      Navigator
-                                                                          .push(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                          builder: (_) =>
-                                                                              MoreInforWidget(
-                                                                            item:
-                                                                                item,
-                                                                          ),
-                                                                        ),
-                                                                      );
-                                                                    }
-                                                                  },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .info_outlined,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBtnText,
-                                                                    size: 24.0,
+                                                                        );
+                                                                      }
+                                                                    },
+                                                                    icon: Icon(
+                                                                      Icons
+                                                                          .info_outlined,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBtnText,
+                                                                      size:
+                                                                          24.0,
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                       Container(
@@ -1083,40 +1082,44 @@ class _AllExpensesWidgetState extends State<AllExpensesWidget> {
                                                   ));
                                         }),
                                   )
-                                : Center(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 150,
+                                : authProviderr.Transactionsitems == null
+                                    ? loader()
+                                    : Center(
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 150,
+                                            ),
+                                            Image.asset(
+                                              'assets/images/cream.png',
+                                              width: 82.0,
+                                              height: 82,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 45.0, 0.0, 0.0),
+                                              child: Text(
+                                                'There are no\nTransactions',
+                                                textAlign: TextAlign.center,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBtnText,
+                                                          fontSize: 24.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Image.asset(
-                                          'assets/images/cream.png',
-                                          width: 82.0,
-                                          height: 82,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 45.0, 0.0, 0.0),
-                                          child: Text(
-                                            'There are no\nTransactions',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBtnText,
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
+                                      )
                       ],
                     ),
                   ],

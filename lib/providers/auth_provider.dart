@@ -283,7 +283,7 @@ class AuthProvider extends ChangeNotifier {
 
   GetLinkRequest? getLinkRequest;
 
-  getBasiqURL(ctx, {phoneNumber}) async {
+  getBasiqURL(ctx, {required String? phoneNumber}) async {
     loading = true;
     notifyListeners();
     // t7550938@gmail.com
@@ -294,17 +294,22 @@ class AuthProvider extends ChangeNotifier {
     // Try bank : westpac
     // Id : 75313349
     // Password : In1808
+    log('phoneNumber: $phoneNumber');
 
     var body = {
       // 'phone_number': "61488824684",
-      'phone_number':
-          phoneNumber?.isEmpty ? phone_number.toString() : phoneNumber,
+      'phone_number': phoneNumber == null
+          ? ''
+          : phoneNumber.isEmpty
+              ? phone_number.toString()
+              : phoneNumber,
     };
     print('shatha--- phone_number: $phone_number');
 
     try {
       print(body);
       var response = await http.postUrl('conect/account/bank', body);
+      log('basiqUrl response: $response');
       print(response.data);
       getLinkRequest = GetLinkRequest.fromJson(response.data);
       loading = false;
@@ -384,7 +389,7 @@ class AuthProvider extends ChangeNotifier {
   ];
   var deduction_status, sort, account_id;
 
-  void TransactionsGet({String? search}) async {
+  TransactionsGet({String? search}) async {
     searchtext = search;
     loading = true;
     userName = await getUserName();
@@ -405,7 +410,7 @@ class AuthProvider extends ChangeNotifier {
 
       response = await http.postUrl('get/all/transaction', body);
       // print("00000response00"+response);
-
+      Transactionsitems?.data?.clear();
       Transactionsitems = Transactions.fromJson(response.data);
       // print('object ${Transactionsitems!.data!.length}');
       loading = false;
@@ -504,6 +509,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       var response = await http.getauth('report/deduction/amount');
       print(response.data);
+      log(response.toString());
       reports = Reports.fromJson(response.data);
       totalDeduction = reports!.data!.deduction!.toInt();
       print('TotalDeduction: $totalDeduction');
@@ -776,6 +782,7 @@ class AuthProvider extends ChangeNotifier {
       loadingNewYearData = true;
       notifyListeners();
       var response = await http.postUrl('user/update/year', {'year': year});
+      // log('779' + response.toString());
       loadingNewYearData = false;
       print(response.data);
       await Navigator.pushReplacement(

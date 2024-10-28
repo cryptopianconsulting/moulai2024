@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moulai1/loader.dart';
 import 'package:provider/provider.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -35,10 +38,12 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
     BuildContext context,
     AuthProvider authProvider,
     List<Text> items,
+    VoidCallback onSelectedItem,
   ) {
     BottomPicker(
       // height: 250,
       items: items,
+      selectedItemIndex: list.indexOf(authProvider.thevalue),
       pickerTitle: Text(
         'Choose the year',
         style: TextStyle(
@@ -58,6 +63,8 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
           authProvider.thevalue = list[index];
           authProvider.changeYear(context, list[index]);
           print(list[index]);
+
+          onSelectedItem();
         });
       },
       pickerTextStyle: TextStyle(
@@ -80,8 +87,14 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    var s = context.watch<FFAppState>();
+
     final authProvider = Provider.of<AuthProvider>(context);
     dropdownValue = authProvider.thevalue;
 
@@ -255,14 +268,19 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
                                                   InkWell(
                                                     onTap: () {
                                                       _openSimpleItemPicker(
-                                                        context,
-                                                        authProvider,
-                                                        list.map((String item) {
-                                                          return Text(
-                                                            item,
-                                                          );
-                                                        }).toList(),
-                                                      );
+                                                          context,
+                                                          authProvider,
+                                                          list.map(
+                                                              (String item) {
+                                                            return Text(
+                                                              item,
+                                                            );
+                                                          }).toList(), () {
+                                                        s.prefs.setString(
+                                                          'year',
+                                                          authProvider.thevalue,
+                                                        );
+                                                      });
                                                     },
                                                     child: SizedBox(
                                                       width: 80,
@@ -272,8 +290,10 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
                                                                 .center,
                                                         children: [
                                                           Text(
-                                                            authProvider
-                                                                .thevalue,
+                                                            s.prefs.getString(
+                                                                    'year') ??
+                                                                authProvider
+                                                                    .thevalue,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -1403,6 +1423,7 @@ class _DashbaordMainScreenState extends State<DashbaordMainScreen> {
                                               ),
                                             ),
                                           ),
+                                          SizedBox(height: 25),
                                         ],
                                       ),
                                     ),
