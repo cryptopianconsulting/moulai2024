@@ -27,9 +27,11 @@ class _AccountLinkedWidgetState extends State<AccountLinkedWidget> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      authProvider.getUserAccounts();
+    });
     _model = createModel(context, () => AccountLinkedModel());
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    authProvider.getUserAccounts();
   }
 
   @override
@@ -123,13 +125,11 @@ class _AccountLinkedWidgetState extends State<AccountLinkedWidget> {
                                   ),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Padding(
-                                        padding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                20.0, 10.0, 20.0, 0.0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 10.0, 20.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
@@ -138,42 +138,38 @@ class _AccountLinkedWidgetState extends State<AccountLinkedWidget> {
                                             Text(
                                               '${item.type!} ',
                                               style:
-                                                  FlutterFlowTheme.of(
-                                                          context)
+                                                  FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'Poppins',
-                                                        color: FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBtnText,
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryBtnText,
                                                         fontSize: 16.0,
                                                       ),
                                             ),
                                             Expanded(
                                               child: Text(
                                                 item.name!,
-                                                overflow:
-                                                    TextOverflow.ellipsis,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                overflow: TextOverflow.ellipsis,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
                                                               .primaryBtnText,
-                                                    ),
+                                                        ),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
                                       Padding(
-                                        padding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                20.0, 0.0, 30.0, 10.0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 0.0, 30.0, 10.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
@@ -194,9 +190,10 @@ class _AccountLinkedWidgetState extends State<AccountLinkedWidget> {
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Poppins',
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBtnText,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryBtnText,
                                                         fontSize: 15.0,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -212,9 +209,10 @@ class _AccountLinkedWidgetState extends State<AccountLinkedWidget> {
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Poppins',
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBtnText,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryBtnText,
                                                       ),
                                             ),
                                           ],

@@ -1,3 +1,4 @@
+import 'package:moulai1/account_plan/account_plan_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../account_linked/account_linked_widget.dart';
 import '../privacy_policy/privacy_policy_widget.dart';
@@ -251,7 +252,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => AccountLinkedWidget(),
+                                  builder: (_) => AccountPlanWidget(),
                                 ),
                               );
                             },

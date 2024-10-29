@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:moulai1/auth/auth_util.dart';
+import 'package:moulai1/connect_bank/connect_bank_widget.dart';
 import 'package:moulai1/loader.dart';
 
 import '../models/Linkedaccounts.dart';
@@ -566,16 +567,16 @@ class _LinkedAccountsWidgetState extends State<LinkedAccountsWidget> {
                             16.0, 16.0, 16.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            String? basiqUrl = await authProvider.getBasiqURL(
-                                context,
-                                phoneNumber: currentPhoneNumber);
+                            // String? basiqUrl = await authProvider.getBasiqURL(
+                            //     context,
+                            //     phoneNumber: currentPhoneNumber);
 
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => WebViewScreen(
-                                  url: basiqUrl,
-                                ),
+                                builder: (_) => ConnectBankWidget(
+                                    // url: basiqUrl,
+                                    ),
                               ),
                             );
                           },

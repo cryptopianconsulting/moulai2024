@@ -521,7 +521,7 @@ class _AccountPlanWidgetState extends State<AccountPlanWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            'All Tax Fillings with CPA + Auduit Insurance',
+                                            'All Tax Fillings with\nCPA + Auduit Insurance',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(

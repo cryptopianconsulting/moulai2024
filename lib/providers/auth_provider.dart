@@ -120,6 +120,19 @@ class AuthProvider extends ChangeNotifier {
       // return response.data['success'];
     } on DioError catch (e) {
       loading = false;
+      log(e.response.toString());
+      if (e.response!.data['errors']['email'][0].toString() ==
+          'The email has already been taken.') {
+        log('email error message');
+        Fluttertoast.showToast(
+            msg: "The email has already been taken.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
       print(e.response!.statusCode.toString());
       notifyListeners();
       if (e.response!.statusMessage.toString() == 'Found') {
@@ -130,17 +143,14 @@ class AuthProvider extends ChangeNotifier {
         // do your stuff here
       } else {
         // Fluttertoast.showToast(
-        //     msg: "Something Went Wronge please try again ",
+        //     msg: e.response!.statusMessage.toString(),
         //     toastLength: Toast.LENGTH_SHORT,
         //     gravity: ToastGravity.BOTTOM,
         //     timeInSecForIosWeb: 2,
         //     backgroundColor: Colors.red,
         //     textColor: Colors.white,
         //     fontSize: 16.0);
-        Navigator.push(
-          ctx,
-          MaterialPageRoute(builder: (_) => NoAccountWidget()),
-        );
+        log(e.response.toString());
       }
 
       print(e.response!.statusMessage.toString());
@@ -162,6 +172,22 @@ class AuthProvider extends ChangeNotifier {
 
       notifyListeners();
 
+      if (response.statusCode == 404) {
+        log('182 Not found');
+        // Fluttertoast.showToast(
+        //     msg: "Email is not registered",
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.BOTTOM,
+        //     timeInSecForIosWeb: 2,
+        //     backgroundColor: Colors.red,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
+        Navigator.push(
+          ctx,
+          MaterialPageRoute(builder: (_) => NoAccountWidget()),
+        );
+      }
+
       if (third_party == 1) {
         email = response.data['data']['user']['email'];
         await setUserEmail(response.data['data']['user']['email']);
@@ -178,7 +204,8 @@ class AuthProvider extends ChangeNotifier {
     } on DioError catch (e) {
       loading = false;
       notifyListeners();
-      if (e.response!.statusMessage.toString() == 'Not Found') {
+      if (e.response!.statusCode == 404) {
+        log('182 Not found');
         // Fluttertoast.showToast(
         //     msg: "Email is not registered",
         //     toastLength: Toast.LENGTH_SHORT,
@@ -219,6 +246,8 @@ class AuthProvider extends ChangeNotifier {
       print(e.response!.statusMessage.toString());
     } catch (e) {
       print(e);
+      log(e.toString());
+      return e;
     }
   }
 
@@ -475,7 +504,7 @@ class AuthProvider extends ChangeNotifier {
       print("00000012222response.data: ${response.data}");
       accounts = Accounts.fromJson(response.data);
       print("accountsaccounts.data: ${accounts?.data}");
-      if (accounts!.data!.length > 0) {
+      if (accounts!.data!.length > 0 || (accounts!.links?.self?.length)! > 0) {
         loading = false;
         notifyListeners();
         return true;

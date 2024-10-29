@@ -357,6 +357,10 @@ class _WorkFromHomeScreenState extends State<WorkFromHomeScreen> {
                                                                 .answer![i]
                                                                 .answer
                                                                 .toString(),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            maxLines: 1,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -379,7 +383,7 @@ class _WorkFromHomeScreenState extends State<WorkFromHomeScreen> {
                                                                       : Color(
                                                                           0xFFA5A5A5),
                                                                   fontSize:
-                                                                      18.0,
+                                                                      14.0,
                                                                 ),
                                                           ),
                                                         ),

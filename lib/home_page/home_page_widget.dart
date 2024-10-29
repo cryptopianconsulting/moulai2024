@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:moulai1/index.dart';
+import 'package:moulai1/providers/auth_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -36,8 +40,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var apiToken = (prefs.getString('token') ?? '');
       print(apiToken);
+      final authProviderr = Provider.of<AuthProvider>(context, listen: false);
+
+      bool hasAccount = await authProviderr.getUserAccounts();
+      log(hasAccount.toString());
+      if (apiToken.toString().length > 10 && !hasAccount) {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ConnectBankWidget(),
+          ),
+        );
+      }
       // ignore: unnecessary_null_comparison
-      if (apiToken.toString().length > 10) {
+      else if (apiToken.toString().length > 10 && hasAccount) {
         await Navigator.push(
           context,
           MaterialPageRoute(

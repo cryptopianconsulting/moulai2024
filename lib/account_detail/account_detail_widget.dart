@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../providers/auth_provider.dart';
 import '/auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -309,6 +311,8 @@ class _AccountDetailWidgetState extends State<AccountDetailWidget> {
                     ),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        // log('message');
+
                         GoRouter.of(context).prepareAuthEvent();
                         await signOut();
                         GoRouter.of(context).clearRedirectLocation();

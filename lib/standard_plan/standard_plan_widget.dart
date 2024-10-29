@@ -414,8 +414,10 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBtnText,
-                                                  fontSize: 14.0,
+                                                  fontSize: 13.0,
                                                 ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
                                           ),
                                         ),
                                         Text(

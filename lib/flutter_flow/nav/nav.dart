@@ -375,7 +375,8 @@ extension NavigationExtensions on BuildContext {
 }
 
 extension GoRouterExtensions on GoRouter {
-  AppStateNotifier get appState => (routerDelegate as AppStateNotifier);
+  // Access AppStateNotifier directly if it's stored elsewhere
+  AppStateNotifier get appState => AppStateNotifier();
 
   void prepareAuthEvent([bool ignoreRedirect = false]) =>
       appState.hasRedirect() && !ignoreRedirect
@@ -388,7 +389,7 @@ extension GoRouterExtensions on GoRouter {
   void clearRedirectLocation() => appState.clearRedirectLocation();
 
   void setRedirectLocationIfUnset(String location) =>
-      (routerDelegate as AppStateNotifier).updateNotifyOnAuthChange(false);
+      appState.updateNotifyOnAuthChange(false);
 }
 
 extension _GoRouterStateExtensions on GoRouterState {

@@ -92,17 +92,17 @@ class HttpService {
     //   'answer_ids': ['2'], // Use a list for multiple values (if needed)
     //   'job_ids': ['1'], // Use a list for multiple values (if needed)
     // };
-    var res;
-    res = await dio
-        .post(
-          urlBase + endPoint,
-          data: body,
-          options: dioo.Options(headers: {
-            HttpHeaders.contentTypeHeader: "application/json",
-          }),
-        )
-        .catchError((onError) => print(
-            'onErroronError ${onError.toString()}---- ${res.toString()}'));
+    var res = await dio.post(
+      urlBase + endPoint,
+      data: body,
+      options: dioo.Options(headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      }),
+    );
+
+    if (res.statusCode != 200) {
+      print('Error: ${res.data}');
+    }
 
     return res;
   }

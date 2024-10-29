@@ -32,9 +32,11 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ConnectBankModel());
-    final authProviderr = Provider.of<AuthProvider>(context, listen: false);
-    repeatCheckBank();
+    WidgetsBinding.instance.addPostFrameCallback((t) {
+      _model = createModel(context, () => ConnectBankModel());
+      final authProviderr = Provider.of<AuthProvider>(context, listen: false);
+      repeatCheckBank();
+    });
   }
 
   Future<void> repeatCheckBank() async {
