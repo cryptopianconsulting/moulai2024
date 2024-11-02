@@ -1,3 +1,4 @@
+import 'package:moulai1/auth/auth_util.dart';
 import 'package:moulai1/index.dart';
 import 'package:moulai1/loader.dart';
 import 'package:moulai1/providers/auth_provider.dart';
@@ -102,12 +103,12 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                         gradientType: GradientType.linear,
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        alignment: AlignmentDirectional(-0.9, 0.0),
                         child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
+                          fillColor: Colors.white,
                           borderRadius: 30.0,
                           borderWidth: 1.0,
-                          buttonSize: 60.0,
+                          buttonSize: 50.0,
                           icon: Icon(
                             Icons.keyboard_arrow_left,
                             color: Colors.black,
@@ -115,6 +116,11 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                           ),
                           onPressed: () {
                             print('IconButton pressed ...');
+                            signOut().then((t) => Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePageWidget()),
+                                ));
                           },
                         ),
                       ),
