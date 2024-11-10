@@ -1,13 +1,16 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use
 
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:moulai1/helpers/helper.dart';
 import 'package:moulai1/index.dart';
 import 'package:moulai1/models/reports.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../dashboard/congratsScreen.dart';
 import '../helpers/api.dart';
@@ -325,20 +328,27 @@ class AuthProvider extends ChangeNotifier {
     // Password : In1808
     log('phoneNumber: $phoneNumber');
 
-    var body = {
-      // 'phone_number': "61488824684",
-      'phone_number': phoneNumber == null
-          ? ''
-          : phoneNumber.isEmpty
-              ? phone_number.toString()
-              : phoneNumber,
-    };
+    var body = FormData.fromMap({
+      'phone_number': '+$phoneNumber',
+    });
+    // 'phone_number': "61488824684",
+
     print('shatha--- phone_number: $phone_number');
 
     try {
       print(body);
       var response = await http.postUrl('conect/account/bank', body);
       log('basiqUrl response: $response');
+      if (response.statusCode != 200) {
+        Fluttertoast.showToast(
+            msg: response.data['message'] ?? 'something went wrong!',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
       print(response.data);
       getLinkRequest = GetLinkRequest.fromJson(response.data);
       loading = false;
@@ -349,7 +359,7 @@ class AuthProvider extends ChangeNotifier {
       loading = false;
       notifyListeners();
       Fluttertoast.showToast(
-          msg: "Something Went Wronge Please Try Again",
+          msg: "Something Went Wrong",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 2,
@@ -641,7 +651,8 @@ class AuthProvider extends ChangeNotifier {
       expensesTransactionsitemCount = 0;
 
       var response = await http.getauth('get/all/transaction/with/deductions');
-      print('-----response.data${response.data}');
+      // log('-----response.data${response.data}');
+
       categoriesedTransactions =
           CategoriesedTransactions.fromJson(response.data);
       categoriesedTransactions!.data!.forEach((element) {
@@ -753,6 +764,13 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
+
   sendCpa(sub, desc) async {
     try {
       loading = true;
@@ -761,6 +779,23 @@ class AuthProvider extends ChangeNotifier {
       var response = await http
           .postUrl('contact_us', {'subject': sub, 'description': desc});
       print(response.data);
+      // final Email email = Email(
+      //   body: desc,
+      //   subject: sub,
+      //   recipients: ['contact@moulai.io'],
+      //   isHTML: false,
+      // );
+
+      // await FlutterEmailSender.send(email);
+      // final Uri emailLaunchUri = Uri(
+      //   scheme: 'mailto',
+      //   path: 'contact@moulai.io',
+      //   query: encodeQueryParameters(<String, String>{
+      //     'subject': '$sub',
+      //     'body': '$desc',
+      //   }),
+      // );
+      // await launch(emailLaunchUri.toString());
       expenseAnalayzed = ExpenseAnalyzed.fromJson(response.data);
 
       loading = false;

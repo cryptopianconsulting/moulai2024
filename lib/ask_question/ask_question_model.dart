@@ -20,6 +20,7 @@ class AskQuestionModel extends FlutterFlowModel {
 
   void dispose() {
     textController?.dispose();
+    textController2?.dispose();
   }
 
   /// Additional helper methods are added here.

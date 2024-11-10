@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moulai1/loader.dart';
+import 'package:moulai1/standard_plan/basic_plan_widget.dart';
+import 'package:moulai1/standard_plan/premium_plan_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
@@ -212,6 +214,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'StandardPlan',
           path: '/standardPlan',
           builder: (context, params) => StandardPlanWidget(),
+        ),
+        FFRoute(
+          name: 'BasicPlan',
+          path: '/basicPlan',
+          builder: (context, params) => BasicPlanWidget(),
+        ),
+        FFRoute(
+          name: 'PremiumPlan',
+          path: '/premiumPlan',
+          builder: (context, params) => PremiumPlanWidget(),
         ),
         FFRoute(
           name: 'Dashboard',

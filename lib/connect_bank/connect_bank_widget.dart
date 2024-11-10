@@ -46,12 +46,12 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
 
     bool hasAccount = await authProviderr.getUserAccounts();
     if (hasAccount) {
-      await Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => AccountLinkedWidget(),
-        ),
-      );
+      // await Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (_) => AccountLinkedWidget(),
+      //   ),
+      // );
     } else {
       await Future.delayed(Duration(seconds: 5));
       // repeatCheckBank();
@@ -65,6 +65,8 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
     _unfocusNode.dispose();
     super.dispose();
   }
+
+  final formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -524,114 +526,108 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                           SizedBox(
                             height: 15,
                           ),
-                          authProvider.weareInThirdParty == true
-                              ? Column(
+                          Form(
+                            key: formkey,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(-1.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Phone Number',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFFA5A5A5),
-                                                        fontSize: 17.0,
-                                                      ),
-                                            ),
-                                          ),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Phone Number',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFFA5A5A5),
+                                                fontSize: 17.0,
+                                              ),
                                         ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 12.0, 16.0, 12.0),
-                                      child: TextFormField(
-                                        controller: phoneController,
-                                        autofocus: true,
-                                        onChanged: (v) {
-                                          authProvider.phone_number = v;
-                                        },
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          hintText: 'Ex: 0476324732',
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodySmall
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Color(0xFFA5A5A5),
-                                                    fontSize: 16.0,
-                                                  ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xFFA5A5A5),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          filled: true,
-                                          fillColor: Color(0xFF202020),
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBtnText,
-                                            ),
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return "Please, enter a valid Phone Number";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
                                       ),
                                     ),
                                   ],
-                                )
-                              : Container(),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 12.0, 16.0, 12.0),
+                                  child: TextFormField(
+                                    controller: phoneController,
+                                    autofocus: true,
+                                    onChanged: (v) {
+                                      authProvider.phone_number = v;
+                                    },
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      hintText: 'Ex: 0476324732',
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFFA5A5A5),
+                                            fontSize: 16.0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xffffffff),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFA5A5A5),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xffffffff),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0xFF202020),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBtnText,
+                                        ),
+                                    validator: (val) {
+                                      if (val!.isEmpty) {
+                                        return "Please, enter a valid Phone Number";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                          // : Container(),
                         ],
                       ),
                       authProvider.loading == true
@@ -643,32 +639,40 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                                       16.0, 16.0, 16.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      String? basiqUrl =
-                                          await authProvider.getBasiqURL(
-                                        context,
-                                        phoneNumber: phoneController.text,
-                                      );
-                                      print('basiqUrl: $basiqUrl');
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => WebViewScreen(
-                                            url: basiqUrl,
-                                          ),
-                                        ),
-                                      ).then((value) async {
-                                        if (value == true) {
-                                          showLoader = value;
-                                          setState(() {});
-                                          if (showLoader == true)
-                                            showLoaderDialog();
-                                          await repeatCheckBank();
-                                          showLoader = !value;
-                                          setState(() {});
-                                          if (showLoader == false)
-                                            Navigator.pop(context);
+                                      if (formkey.currentState!.validate()) {
+                                        String? basiqUrl =
+                                            await authProvider.getBasiqURL(
+                                          context,
+                                          phoneNumber:
+                                              phoneController.text.isEmpty
+                                                  ? ''
+                                                  : phoneController.text,
+                                        );
+                                        print('basiqUrl: $basiqUrl');
+                                        if (basiqUrl == null) {
+                                          return;
                                         }
-                                      });
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => WebViewScreen(
+                                              url: basiqUrl,
+                                            ),
+                                          ),
+                                        ).then((value) async {
+                                          if (value == true) {
+                                            showLoader = value;
+                                            setState(() {});
+                                            if (showLoader == true)
+                                              showLoaderDialog();
+                                            await repeatCheckBank();
+                                            showLoader = !value;
+                                            setState(() {});
+                                            if (showLoader == false)
+                                              Navigator.pop(context);
+                                          }
+                                        });
+                                      }
                                     },
                                     text: 'Connect ',
                                     options: FFButtonOptions(

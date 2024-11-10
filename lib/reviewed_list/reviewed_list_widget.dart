@@ -45,6 +45,7 @@ class _ReviewedListWidgetState extends State<ReviewedListWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
     var authProvider = Provider.of<AuthProvider>(context);
+    print(authProvider.categoriesedTransactions!.data![0].transactions!.length);
 
     return Scaffold(
       key: scaffoldKey,
@@ -563,145 +564,158 @@ class _ReviewedListWidgetState extends State<ReviewedListWidget> {
                                                       );
                                                     }
                                                   },
-                                                  child:   Padding(
+                                                  child: Padding(
                                                     padding:
-                                                    EdgeInsetsDirectional.fromSTEB(
-                                                        18.0, 12.0, 18.0, 10.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                18.0,
+                                                                12.0,
+                                                                0.0,
+                                                                10.0),
                                                     child: Row(
-                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
                                                       children: [
                                                         Container(
                                                           width: 24.0,
                                                           height: 24.0,
-                                                          decoration: BoxDecoration(
+                                                          decoration:
+                                                              BoxDecoration(
                                                             color: Colors.black,
                                                             borderRadius:
-                                                            BorderRadius.circular(
-                                                                3.0),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        3.0),
                                                             border: Border.all(
-                                                              color: Color(0xFFA5A5A5),
+                                                              color: Color(
+                                                                  0xFFA5A5A5),
                                                             ),
                                                           ),
                                                           child: Theme(
                                                             data: ThemeData(
                                                               checkboxTheme:
-                                                              CheckboxThemeData(
+                                                                  CheckboxThemeData(
                                                                 shape:
-                                                                RoundedRectangleBorder(
+                                                                    RoundedRectangleBorder(
                                                                   borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                      3.0),
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              3.0),
                                                                 ),
                                                               ),
                                                               unselectedWidgetColor:
-                                                              Colors.black,
+                                                                  Colors.black,
                                                             ),
                                                             child: Checkbox(
                                                               value: selectedIds
                                                                   .contains(
-                                                                  item.id),
+                                                                      item.id),
                                                               onChanged:
                                                                   (newValue) async {
                                                                 if (selectedIds
-                                                                    .contains(
-                                                                    item.id)) {
+                                                                    .contains(item
+                                                                        .id)) {
                                                                   selectedIds
-                                                                      .remove(
-                                                                      item.id);
+                                                                      .remove(item
+                                                                          .id);
                                                                 } else {
                                                                   selectedIds
                                                                       .add(item
-                                                                      .id);
+                                                                          .id);
                                                                   setState(() =>
-                                                                  _model.checkboxValue2 =
-                                                                  newValue!);
+                                                                      _model.checkboxValue2 =
+                                                                          newValue!);
                                                                 }
 
-                                                                setState(
-                                                                        () {});
+                                                                setState(() {});
                                                               },
-                                                              activeColor:
-                                                              Color(
+                                                              activeColor: Color(
                                                                   0xFFBEF397),
                                                               checkColor:
-                                                              Colors
-                                                                  .black,
+                                                                  Colors.black,
                                                             ),
                                                           ),
                                                         ),
                                                         Padding(
-                                                          padding: EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                              23.0, 0.0, 0.0, 0.0),
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      23.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
                                                           child: Container(
-                                                            width:
-                                                            MediaQuery.of(context)
-                                                                .size
-                                                                .width *
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
                                                                 .4,
                                                             child: Text(
                                                               authProvider
                                                                   .categoriesedTransactions!
-                                                                  .data![
-                                                              0]
+                                                                  .data![0]
                                                                   .transactions![
-                                                              i]
+                                                                      i]
                                                                   .merchantBusinessName
                                                                   .toString(),
-                                                              style:
-                                                              FlutterFlowTheme.of(
-                                                                  context)
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                fontFamily:
-                                                                'Poppins',
-                                                                color: Color(
-                                                                    0xFFDBEBFD),
-                                                              ),
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                    color: Color(
+                                                                        0xFFDBEBFD),
+                                                                  ),
                                                             ),
                                                           ),
                                                         ),
                                                         Spacer(),
                                                         Column(
                                                           crossAxisAlignment:
-                                                          CrossAxisAlignment.start,
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             Text(
                                                               '${formatCurrency.format(item.amount)}',
-                                                              style:
-                                                              FlutterFlowTheme.of(
-                                                                  context)
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
                                                                   .bodyMedium
                                                                   .override(
-                                                                fontFamily:
-                                                                'Poppins',
-                                                                color: FlutterFlowTheme.of(
-                                                                    context)
-                                                                    .primaryBtnText,
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .w500,
-                                                              ),
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBtnText,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
                                                             ),
-                                                            Text(
-                                                              authProvider
-                                                                  .categoriesedTransactions!
-                                                                  .data![
-                                                              0]
-                                                                  .subdivisionTitle
-                                                                  .toString(),
-                                                              style:
-                                                              FlutterFlowTheme.of(
-                                                                  context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                fontFamily:
-                                                                'Poppins',
-                                                                color: FlutterFlowTheme.of(
-                                                                    context)
-                                                                    .primaryBtnText,
-                                                                fontSize: 12.0,
+                                                            SizedBox(
+                                                              width: 120,
+                                                              child: Text(
+                                                                authProvider
+                                                                    .categoriesedTransactions!
+                                                                    .data![0]
+                                                                    .subdivisionTitle
+                                                                    .toString(),
+                                                                maxLines: 1,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBtnText,
+                                                                      fontSize:
+                                                                          11.0,
+                                                                    ),
                                                               ),
                                                             ),
                                                           ],

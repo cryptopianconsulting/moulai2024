@@ -85,6 +85,7 @@ dependencies:
   stripe_platform_interface: 
   timeago:
   url_launcher:
+  flutter_email_sender: ^6.0.3
   dio:
   flutter_secure_storage:
   syncfusion_flutter_charts:

@@ -10,14 +10,14 @@ import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'standard_plan_model.dart';
 export 'standard_plan_model.dart';
 
-class StandardPlanWidget extends StatefulWidget {
-  const StandardPlanWidget({Key? key}) : super(key: key);
+class BasicPlanWidget extends StatefulWidget {
+  const BasicPlanWidget({Key? key}) : super(key: key);
 
   @override
-  _StandardPlanWidgetState createState() => _StandardPlanWidgetState();
+  _BasicPlanWidgetState createState() => _BasicPlanWidgetState();
 }
 
-class _StandardPlanWidgetState extends State<StandardPlanWidget> {
+class _BasicPlanWidgetState extends State<BasicPlanWidget> {
   late StandardPlanModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -162,7 +162,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Standard',
+                                          'Basic',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -196,7 +196,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '\$16',
+                                          '\$7',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -258,7 +258,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 17.0, 0.0, 5.0),
                                             child: Text(
-                                              '\$192 per year. Cancel anytime.',
+                                              '\$84 per year. Cancel anytime.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -275,7 +275,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 5.0, 0.0, 17.0),
                                             child: Text(
-                                              '\$120 per year after tax deduction',
+                                              '\$58 per year after tax deduction',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -298,9 +298,9 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         FaIcon(
-                                          FontAwesomeIcons.check,
-                                          color: Color(0xFFBEF397),
-                                          size: 12.0,
+                                          FontAwesomeIcons.xmark,
+                                          color: Color(0xFFEE1111),
+                                          size: 14.0,
                                         ),
                                         Padding(
                                           padding:
@@ -310,12 +310,17 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                             'All tax filings with CPA',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
-                                                .override(
+                                                .copyWith(
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryBtnText,
+                                                      .accent1,
                                                   fontSize: 14.0,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  decorationColor: Colors
+                                                      .white70
+                                                      .withOpacity(0.3),
                                                 ),
                                           ),
                                         ),
@@ -323,12 +328,16 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                           ' - federal, state',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
-                                              .override(
+                                              .copyWith(
                                                 fontFamily: 'Poppins',
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryBtnText,
-                                                fontSize: 12.0,
+                                                        .accent1,
+                                                fontSize: 14.0,
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                decorationColor: Colors.white70
+                                                    .withOpacity(0.3),
                                               ),
                                         ),
                                       ],
@@ -341,9 +350,9 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         FaIcon(
-                                          FontAwesomeIcons.check,
-                                          color: Color(0xFFBEF397),
-                                          size: 12.0,
+                                          FontAwesomeIcons.xmark,
+                                          color: Color(0xFFEE1111),
+                                          size: 14.0,
                                         ),
                                         Padding(
                                           padding:
@@ -353,12 +362,17 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                             'Tax audit insurance',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
-                                                .override(
+                                                .copyWith(
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryBtnText,
+                                                      .accent1,
                                                   fontSize: 14.0,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  decorationColor: Colors
+                                                      .white70
+                                                      .withOpacity(0.3),
                                                 ),
                                           ),
                                         ),
@@ -420,7 +434,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBtnText,
-                                                  fontSize: 13.0,
+                                                  fontSize: 12.0,
                                                 ),
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -449,9 +463,9 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         FaIcon(
-                                          FontAwesomeIcons.check,
-                                          color: Color(0xFFBEF397),
-                                          size: 12.0,
+                                          FontAwesomeIcons.xmark,
+                                          color: Color(0xFFEE1111),
+                                          size: 14.0,
                                         ),
                                         Padding(
                                           padding:
@@ -461,12 +475,17 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                             'Unlimited CPA advice',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
-                                                .override(
+                                                .copyWith(
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryBtnText,
+                                                      .accent1,
                                                   fontSize: 14.0,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  decorationColor: Colors
+                                                      .white70
+                                                      .withOpacity(0.3),
                                                 ),
                                           ),
                                         ),
@@ -550,7 +569,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .accent1,
-                                                  fontSize: 12.0,
+                                                  fontSize: 14.0,
                                                   decoration: TextDecoration
                                                       .lineThrough,
                                                   decorationColor: Colors
@@ -601,7 +620,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
 
                       // setState(() {});
                     },
-                    text: 'Continue with standard',
+                    text: 'Continue with basic',
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 63.0,

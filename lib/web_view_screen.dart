@@ -71,7 +71,7 @@ class WebViewScreenState extends State<WebViewScreen> {
         ),
       ),
       body: WebView(
-        initialUrl: widget.url,
+        initialUrl: widget.url ?? '',
         javascriptMode: JavascriptMode.unrestricted,
         gestureRecognizers: gestureRecognizers,
         onWebViewCreated: (controller) {
