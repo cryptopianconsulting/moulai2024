@@ -52,24 +52,27 @@ class DefaultFirebaseOptions {
     messagingSenderId: '188039330210',
     projectId: 'moulai2024-dd01c',
     authDomain: 'moulai2024-dd01c.firebaseapp.com',
-    storageBucket: 'moulai2024-dd01c.appspot.com',
+    storageBucket: 'moulai2024-dd01c.firebasestorage.app',
     measurementId: 'G-ZJF3B3LCGQ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyClSN8cbw5_0llnGt4vxNg8eN8DNntmOIE',
-    appId: '1:188039330210:android:e8934f59660ef0a9acdafb',
+    appId: '1:188039330210:android:289941d8451973bbacdafb',
     messagingSenderId: '188039330210',
     projectId: 'moulai2024-dd01c',
-    storageBucket: 'moulai2024-dd01c.appspot.com',
+    storageBucket: 'moulai2024-dd01c.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBo5NWTRXrjGz9x5UTzd5juHghYq6XpMXc',
-    appId: '1:188039330210:ios:d836d01d5f82c529acdafb',
+    appId: '1:188039330210:ios:ea155d910bc829f7acdafb',
     messagingSenderId: '188039330210',
     projectId: 'moulai2024-dd01c',
-    storageBucket: 'moulai2024-dd01c.appspot.com',
-    iosBundleId: 'com.mycompany.moula',
+    storageBucket: 'moulai2024-dd01c.firebasestorage.app',
+    androidClientId: '188039330210-45mcih7gvtvtfmucn1meuguiebafhbtq.apps.googleusercontent.com',
+    iosClientId: '188039330210-fhnfist09nuonpjidb66cetfb4cqksef.apps.googleusercontent.com',
+    iosBundleId: 'com.mycompany.moulai',
   );
+
 }

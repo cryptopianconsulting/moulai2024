@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "188039330210",
+    "project_id": "moulai2024-dd01c",
+    "storage_bucket": "moulai2024-dd01c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188039330210:android:e8934f59660ef0a9acdafb",
+        "android_client_info": {
+          "package_name": "com.mycompany.moula"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188039330210-45mcih7gvtvtfmucn1meuguiebafhbtq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.moula",
+            "certificate_hash": "d9372b893c0eb195c2e0833f912eb039116fb036"
+          }
+        },
+        {
+          "client_id": "188039330210-425c7dko1jp0oq8d0onflhrhph312lng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClSN8cbw5_0llnGt4vxNg8eN8DNntmOIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188039330210-425c7dko1jp0oq8d0onflhrhph312lng.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "188039330210-mt32eviu1rcjk3ruqrf1gomjefv1he3v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.moula"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188039330210:android:289941d8451973bbacdafb",
+        "android_client_info": {
+          "package_name": "com.mycompany.moulai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188039330210-425c7dko1jp0oq8d0onflhrhph312lng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClSN8cbw5_0llnGt4vxNg8eN8DNntmOIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188039330210-425c7dko1jp0oq8d0onflhrhph312lng.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "188039330210-mt32eviu1rcjk3ruqrf1gomjefv1he3v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.moula"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

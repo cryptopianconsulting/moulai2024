@@ -46,12 +46,12 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
 
     bool hasAccount = await authProviderr.getUserAccounts();
     if (hasAccount) {
-      // await Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (_) => AccountLinkedWidget(),
-      //   ),
-      // );
+      await Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => AccountLinkedWidget(),
+        ),
+      );
     } else {
       await Future.delayed(Duration(seconds: 5));
       // repeatCheckBank();
@@ -118,11 +118,7 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                           ),
                           onPressed: () {
                             print('IconButton pressed ...');
-                            signOut().then((t) => Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomePageWidget()),
-                                ));
+                            Navigator.pop(context);
                           },
                         ),
                       ),

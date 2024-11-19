@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:in_app_purchase/in_app_purchase.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -27,6 +29,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => StandardPlanModel());
+    fetchProducts();
   }
 
   @override
@@ -35,6 +38,31 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
 
     _unfocusNode.dispose();
     super.dispose();
+  }
+
+  List<ProductDetails>? products;
+  void fetchProducts() async {
+    final bool available = await InAppPurchase.instance.isAvailable();
+    if (!available) return;
+
+    const Set<String> _kIds = {
+      'basic_subscription',
+      'standard_subscription',
+      'premium_subscription'
+    };
+    final ProductDetailsResponse response =
+        await InAppPurchase.instance.queryProductDetails(_kIds);
+    if (response.error == null) {
+      setState(() {
+        products = response.productDetails;
+      });
+    }
+  }
+
+  Future<bool> purchaseProduct(ProductDetails product) async {
+    final PurchaseParam purchaseParam = PurchaseParam(productDetails: product);
+    return InAppPurchase.instance
+        .buyNonConsumable(purchaseParam: purchaseParam);
   }
 
   @override
@@ -576,28 +604,10 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                       EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      // final paymentResponse = await processStripePayment(
-                      //   context,
-                      //   amount: 10099,
-                      //   currency: 'USD',
-                      //   customerEmail: currentUserEmail,
-                      //   customerName: currentUserDisplayName,
-                      //   description: 'Plan payment',
-                      //   allowGooglePay: true,
-                      //   allowApplePay: false,
-                      // );
-                      // if (paymentResponse.paymentId == null) {
-                      //   if (paymentResponse.errorMessage != null) {
-                      //     showSnackbar(
-                      //       context,
-                      //       'Error: ${paymentResponse.errorMessage}',
-                      //     );
-                      //   }
-                      //   return;
-                      // }
-                      // _model.paymentId = paymentResponse.paymentId!;
-
-                      context.goNamed('Dashboard');
+                      var purchased = await purchaseProduct(products![3]);
+                      if (purchased) {
+                        context.goNamed('Dashboard');
+                      }
 
                       // setState(() {});
                     },

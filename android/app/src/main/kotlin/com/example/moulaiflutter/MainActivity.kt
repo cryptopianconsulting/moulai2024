@@ -1,4 +1,4 @@
-package com.mycompany.moula
+package com.mycompany.moulai
 
 import io.flutter.embedding.android.FlutterActivity
 
