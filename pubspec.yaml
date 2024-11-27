@@ -89,6 +89,7 @@ dependencies:
   dio:
   flutter_secure_storage:
   syncfusion_flutter_charts:
+  intl_phone_field: ^3.2.0
   # open_mail_app: 
   http:
   fluttertoast:

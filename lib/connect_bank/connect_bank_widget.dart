@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:moulai1/auth/auth_util.dart';
 import 'package:moulai1/index.dart';
 import 'package:moulai1/loader.dart';
@@ -553,12 +556,16 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 12.0),
-                                  child: TextFormField(
+                                  child: IntlPhoneField(
                                     controller: phoneController,
-                                    autofocus: true,
+                                    initialCountryCode: 'US',
                                     onChanged: (v) {
-                                      authProvider.phone_number = v;
+                                      authProvider.phone_number =
+                                          v.completeNumber;
+                                      setState(() {});
+                                      log(v.completeNumber);
                                     },
+                                    autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       hintText: 'Ex: 0476324732',
@@ -611,13 +618,6 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                                           color: FlutterFlowTheme.of(context)
                                               .primaryBtnText,
                                         ),
-                                    validator: (val) {
-                                      if (val!.isEmpty) {
-                                        return "Please, enter a valid Phone Number";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
                                   ),
                                 ),
                               ],
