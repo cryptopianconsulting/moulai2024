@@ -66,13 +66,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBo5NWTRXrjGz9x5UTzd5juHghYq6XpMXc',
-    appId: '1:188039330210:ios:ea155d910bc829f7acdafb',
+    appId: '1:188039330210:ios:d836d01d5f82c529acdafb',
     messagingSenderId: '188039330210',
     projectId: 'moulai2024-dd01c',
     storageBucket: 'moulai2024-dd01c.firebasestorage.app',
     androidClientId: '188039330210-45mcih7gvtvtfmucn1meuguiebafhbtq.apps.googleusercontent.com',
-    iosClientId: '188039330210-fhnfist09nuonpjidb66cetfb4cqksef.apps.googleusercontent.com',
-    iosBundleId: 'com.mycompany.moulai',
+    iosClientId: '188039330210-mt32eviu1rcjk3ruqrf1gomjefv1he3v.apps.googleusercontent.com',
+    iosBundleId: 'com.mycompany.moula',
   );
 
 }

@@ -436,6 +436,8 @@ class AuthProvider extends ChangeNotifier {
     email = await getUserEmail();
     last_name = await getLastName();
     notifyListeners();
+    log(deduction_status);
+
     var body = {
       "deduction_status": deduction_status,
       "sort": sort == null ? '' : sortbyList.indexOf(sort),
