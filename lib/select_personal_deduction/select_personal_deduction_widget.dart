@@ -243,7 +243,7 @@ class _SelectPersonalDeductionWidgetState
                             0.0,
                           ),
                           child: Text(
-                            authProvider.questionsModel!.data![5].question
+                            authProvider.questionsModel!.data![3].question
                                 .toString()
                                 .split('personal ')
                                 .join(),

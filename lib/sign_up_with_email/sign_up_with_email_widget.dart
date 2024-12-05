@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/services.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../confirm_legal_name/confirm_legal_name_widget.dart';
 import '../providers/auth_provider.dart';
@@ -271,25 +274,15 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 12.0, 16.0, 12.0),
-                              child: TextFormField(
+                              child: IntlPhoneField(
                                 controller: _model.phoneController,
-                                autofocus: false,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(10),
-                                ],
-                                onChanged: (phone) {
-                                  print('phone----:$phone');
-                                  authProvider.phone_number = phone;
-
-                                  // final formattedNumber = formatPhoneNumber(phone);
-
-                                  // authProvider.phone_number = TextEditingValue(
-                                  //   text: formattedNumber,
-                                  //   selection: TextSelection.collapsed(
-                                  //       offset: formattedNumber.length),
-                                  // );
+                                initialCountryCode: 'US',
+                                onChanged: (v) {
+                                  authProvider.phone_number = v.completeNumber;
+                                  setState(() {});
+                                  log(v.completeNumber);
                                 },
+                                autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   hintText: 'Ex: 0476324732',
@@ -302,7 +295,7 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                                       ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0x00000000),
+                                      color: Color(0xffffffff),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -323,7 +316,7 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0x00000000),
+                                      color: Color(0xffffffff),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -338,8 +331,6 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .primaryBtnText,
                                     ),
-                                keyboardType: TextInputType.phone,
-                                validator: validPhoneNum,
                               ),
                             ),
                           ],
