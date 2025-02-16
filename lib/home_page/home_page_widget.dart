@@ -45,10 +45,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       bool hasAccount = await authProviderr.getUserAccounts();
       log(hasAccount.toString());
       if (apiToken.toString().length > 10 && !hasAccount) {
+        // await Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => ConnectBankWidget(isFromWelcome: true),
+        //   ),
+        // );
         await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => ConnectBankWidget(),
+            builder: (_) => DashboardWidget(),
           ),
         );
       }

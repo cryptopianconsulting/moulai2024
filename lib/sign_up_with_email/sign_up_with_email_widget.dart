@@ -277,11 +277,15 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                               child: IntlPhoneField(
                                 controller: _model.phoneController,
                                 initialCountryCode: 'US',
-                                onChanged: (v) {
+                                onChanged: (v) async {
                                   authProvider.phone_number = v.completeNumber;
                                   setState(() {});
-                                  log(v.completeNumber);
+                                  await FFAppState()
+                                      .prefs
+                                      .setString('phone', v.number);
+                                  // log(v.number);
                                 },
+                                onSubmitted: (v) {},
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -351,13 +355,13 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                         FocusManager.instance.primaryFocus?.unfocus();
                         if (formKey.currentState!.validate()) {
                           authProvider.email = _model.emailTextController.text;
-
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => ConfirmLegalNameWidget(),
-                            ),
-                          );
+                          await authProvider.signUp(context, 0);
+                          // await Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (_) => ConfirmLegalNameWidget(),
+                          //   ),
+                          // );
                           //third screen
                           // context.pushNamedAuth(
                           //   'ConnectBank',

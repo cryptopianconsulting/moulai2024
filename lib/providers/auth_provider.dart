@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:moulai1/app_state.dart';
 import 'package:moulai1/helpers/helper.dart';
 import 'package:moulai1/index.dart';
 import 'package:moulai1/models/reports.dart';
@@ -95,7 +96,6 @@ class AuthProvider extends ChangeNotifier {
       log('response=====${response.data}');
 
       // await setUserToken(response.data['data']['user']['token']);
-
       await Navigator.push(
         ctx,
         MaterialPageRoute(
@@ -124,8 +124,7 @@ class AuthProvider extends ChangeNotifier {
     } on DioError catch (e) {
       loading = false;
       log(e.response.toString());
-      if (e.response!.data['errors']['email'][0].toString() ==
-          'The email has already been taken.') {
+      if (e.response!.data['errors']['email'] != null) {
         log('email error message');
         Fluttertoast.showToast(
             msg: "The email has already been taken.",
@@ -135,6 +134,13 @@ class AuthProvider extends ChangeNotifier {
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
+      } else {
+        await Navigator.push(
+          ctx,
+          MaterialPageRoute(
+            builder: (_) => ConfirmLegalNameWidget(),
+          ),
+        );
       }
       print(e.response!.statusCode.toString());
       notifyListeners();
@@ -328,10 +334,10 @@ class AuthProvider extends ChangeNotifier {
     // Password : In1808
     log('phoneNumber: $phoneNumber');
 
-    var body = FormData.fromMap({
+    var body = {
       'phone_number': phoneNumber,
       // '+$phoneNumber',
-    });
+    };
     // 'phone_number': "61488824684",
 
     print('shatha--- phone_number: $phone_number');
@@ -517,7 +523,7 @@ class AuthProvider extends ChangeNotifier {
       print("00000012222response.data: ${response.data}");
       accounts = Accounts.fromJson(response.data);
       print("accountsaccounts.data: ${accounts?.data}");
-      if (accounts!.data!.length > 0 || (accounts!.links?.self?.length)! > 0) {
+      if (accounts!.data!.length > 0) {
         loading = false;
         notifyListeners();
         return true;

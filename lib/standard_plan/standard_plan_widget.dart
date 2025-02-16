@@ -43,6 +43,7 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
   List<ProductDetails>? products;
   void fetchProducts() async {
     final bool available = await InAppPurchase.instance.isAvailable();
+    print('available: $available');
     if (!available) return;
 
     const Set<String> _kIds = {
@@ -59,8 +60,11 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
     }
   }
 
-  Future<bool> purchaseProduct(ProductDetails product) async {
-    final PurchaseParam purchaseParam = PurchaseParam(productDetails: product);
+  Future<bool> purchaseProduct(String productId) async {
+    final ProductDetails product =
+        products!.firstWhere((p) => p.id == productId);
+
+    final PurchaseParam purchaseParam = PurchaseParam(productDetails: product!);
     return InAppPurchase.instance
         .buyNonConsumable(purchaseParam: purchaseParam);
   }
@@ -604,7 +608,8 @@ class _StandardPlanWidgetState extends State<StandardPlanWidget> {
                       EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      var purchased = await purchaseProduct(products![3]);
+                      var purchased =
+                          await purchaseProduct('standard_subscription');
                       if (purchased) {
                         context.goNamed('Dashboard');
                       }

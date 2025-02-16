@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:moulai1/auth/auth_util.dart';
 import 'package:moulai1/index.dart';
@@ -20,7 +21,8 @@ import 'connect_bank_model.dart';
 export 'connect_bank_model.dart';
 
 class ConnectBankWidget extends StatefulWidget {
-  const ConnectBankWidget({Key? key}) : super(key: key);
+  final bool? isFromWelcome;
+  const ConnectBankWidget({Key? key, this.isFromWelcome}) : super(key: key);
 
   @override
   _ConnectBankWidgetState createState() => _ConnectBankWidgetState();
@@ -40,6 +42,7 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
       _model = createModel(context, () => ConnectBankModel());
       final authProviderr = Provider.of<AuthProvider>(context, listen: false);
       repeatCheckBank();
+      // phoneController.text = FFAppState().prefs.getString('phone') ?? '';
     });
   }
 
@@ -119,9 +122,16 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                             color: Colors.black,
                             size: 30.0,
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                            Navigator.pop(context);
+                          onPressed: () async {
+                            if (widget.isFromWelcome != null) {
+                              log('message');
+
+                              if (widget.isFromWelcome!) {
+                                // await signOut();
+                                Navigator.pop(context);
+                              }
+                            } else
+                              Navigator.pop(context);
                           },
                         ),
                       ),
@@ -558,6 +568,9 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                                       16.0, 12.0, 16.0, 12.0),
                                   child: IntlPhoneField(
                                     controller: phoneController,
+                                    initialValue:
+                                        FFAppState().prefs.getString('phone') ??
+                                            '',
                                     initialCountryCode: 'US',
                                     onChanged: (v) {
                                       authProvider.phone_number =
@@ -640,9 +653,7 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                                             await authProvider.getBasiqURL(
                                           context,
                                           phoneNumber:
-                                              phoneController.text.isEmpty
-                                                  ? ''
-                                                  : phoneController.text,
+                                              authProvider.phone_number,
                                         );
                                         print('basiqUrl: $basiqUrl');
                                         if (basiqUrl == null) {

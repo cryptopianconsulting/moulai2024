@@ -40,6 +40,7 @@ class HttpService {
   Future<dioo.Response> postUrl(endPoint, body) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print('urlBase: -- ${urlBase + endPoint}');
+    print(body);
 
     // apiToken =
     //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5OTBjNTUwOC1hYWI1LTQ3ZjctYjU2NC1mMzdjYmU0Yjc1NmEiLCJqdGkiOiJlY2EyNDIxYzA2ZjQyYWNiNzBiNjU1MTg4Yzc4OGMzZjg5NWFiNDE4YmZiMDJjMTNhNTgzMDg4MjJjZGZmMWI0YjEwOTlkNDQ2NjhjZjkxNyIsImlhdCI6MTY5MDQ5OTMxOC4yNzY1MDYsIm5iZiI6MTY5MDQ5OTMxOC4yNzY1MjUsImV4cCI6MTcyMjEyMTcxOC4yNTIzNzUsInN1YiI6IjhjZDU2NDVlLTIzMjctNDE3MC04Y2VlLTc0YTAwM2RmNGNjMyIsInNjb3BlcyI6W119.DY3_cMihs1WTPyvPpEGWdm-2srnqSALC7m_f8BF9M4aSkeQhK3DTMyN5mXYQsXZALHgLx7wqDOa9glYKx4O8UtybOOoBmY76FC0AphBrmEb5eZTneYWvkGUU9bC9iO9oldVAIMV85KcMw4Xnp4CqZ-to65j0zfHCmVWRvwl6eHsP-ZTjLkKfOggQmQWBSSxqRRt1UUr_TqUMfAVxZazbi-yZ2lxHv88DJffjyZtD0bYvNJg_QK79ogJb5hMXtb2lDgIt7BMT7VfUUbNFbTMyo8uT7rcM5C8SgS6mL4A5iqRZyywNZWhCQc73e96wp-XEMlCVq83AdJHCbPeK1iRdbmrM_PaibyE7sFmXmObJ_PBaOJkSLrM2lxLEkVrcCE9JH_RT4M9QdajQql_mEzeLIEIg7mSS1SUVNLbFYja2JU8CHmtGjtctHTU-6junmSbkrd8A4Agj67moZQuLiMN3hi8JinDQ8xhTKppYhy5NYGiMdY6N3Vqq7P0vLLLjoL4v9fnJq7Qcb6QRnMvg9lU3Ll0_k5-J7EjaaN6f40c3RKE9emLe2dTY_RshZP-24S99CMFq6dQy5CA8Z0BH55mD_kfy9dtpjkt8peyFk0fXE5ysiGSdzJWvlf3NqcvsflBGAaTq7sK1h6z51iUYp4EMUrS4ctNmHT9VBA9tetEtrOk";
@@ -52,10 +53,9 @@ class HttpService {
             data: body,
             options: dioo.Options(
                 validateStatus: (status) => true,
-                contentType: dioo.Headers.formUrlEncodedContentType,
+                contentType: 'application/json',
                 headers: {
                   'Authorization': 'Bearer $apiToken',
-                  HttpHeaders.contentTypeHeader: "application/json",
                 }))
         .catchError((onError) {
       print('onError: ${onError.toString()}');
