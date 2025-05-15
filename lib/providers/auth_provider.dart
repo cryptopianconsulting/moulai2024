@@ -123,7 +123,7 @@ class AuthProvider extends ChangeNotifier {
       // return response.data['success'];
     } on DioError catch (e) {
       loading = false;
-      log(e.response.toString());
+      log(e.response!.data.toString());
       if (e.response!.data['errors']['email'] != null) {
         log('email error message');
         Fluttertoast.showToast(

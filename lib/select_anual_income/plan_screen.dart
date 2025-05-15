@@ -72,6 +72,15 @@ class _PlanScreenState extends State<PlanScreen> {
                                 16.0, 0.0, 0.0, 0.0),
                             child: InkWell(
                               onTap: () {
+                                authProviderr.navigationSelection = [];
+                                authProviderr.selectedDeductionList = [];
+                                authProviderr.selectedDeductionForRemovingNone =
+                                    [];
+                                authProviderr.deductionNumber = 0;
+                                authProviderr.slectedJobsIds = [];
+                                authProviderr.selectedDeductionForRemovingNone =
+                                    [];
+                                authProviderr.notifyListeners();
                                 Navigator.pop(context);
                               },
                               child: Icon(
@@ -311,44 +320,49 @@ class _PlanScreenState extends State<PlanScreen> {
                                                               : SizedBox
                                                                   .shrink(),
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      10.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Text(
-                                                            authProviderr
-                                                                .questionsModel!
-                                                                .data![3]
-                                                                .answer![i]
-                                                                .answer
-                                                                .toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  // ignore: unrelated_type_equality_checks
-                                                                  color: authProviderr.selectPlanList.contains(authProviderr
-                                                                          .questionsModel!
-                                                                          .data![
-                                                                              3]
-                                                                          .answer![
-                                                                              i]
-                                                                          .id
-                                                                          .toString())
-                                                                      ? FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryBtnText
-                                                                      : Color(
-                                                                          0xFFA5A5A5),
-                                                                  fontSize:
-                                                                      18.0,
-                                                                ),
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              authProviderr
+                                                                  .questionsModel!
+                                                                  .data![3]
+                                                                  .answer![i]
+                                                                  .answer
+                                                                  .toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                    // ignore: unrelated_type_equality_checks
+                                                                    color: authProviderr.selectPlanList.contains(authProviderr
+                                                                            .questionsModel!
+                                                                            .data![
+                                                                                3]
+                                                                            .answer![
+                                                                                i]
+                                                                            .id
+                                                                            .toString())
+                                                                        ? FlutterFlowTheme.of(context)
+                                                                            .primaryBtnText
+                                                                        : Color(
+                                                                            0xFFA5A5A5),
+                                                                    fontSize:
+                                                                        15.0,
+                                                                  ),
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              maxLines: 1,
+                                                            ),
                                                           ),
                                                         ),
                                                       ],

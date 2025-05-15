@@ -1,4 +1,5 @@
 import 'package:moulai1/loader.dart';
+import 'package:moulai1/select_work_kind/select_work_kind_model.dart';
 
 import '../providers/auth_provider.dart';
 import '../select_personal_deduction/select_personal_deduction_widget.dart';
@@ -19,6 +20,7 @@ class SelectWorkForWidget extends StatefulWidget {
 
 class _SelectWorkForWidgetState extends State<SelectWorkForWidget> {
   late SelectWorkForModel _model;
+  late SelectWorkKindModel _oldModel;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -27,6 +29,7 @@ class _SelectWorkForWidgetState extends State<SelectWorkForWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SelectWorkForModel());
+    _oldModel = createModel(context, () => SelectWorkKindModel());
 
     _model.textController ??= TextEditingController();
   }
@@ -71,6 +74,9 @@ class _SelectWorkForWidgetState extends State<SelectWorkForWidget> {
                                 16.0, 0.0, 0.0, 0.0),
                             child: InkWell(
                               onTap: () async {
+                                authProviderr.selectedJob =
+                                    Selectedjob(id: ' 0', jobName: 'dasda');
+                                authProviderr.notifyListeners();
                                 Navigator.pop(context);
                               },
                               child: Icon(

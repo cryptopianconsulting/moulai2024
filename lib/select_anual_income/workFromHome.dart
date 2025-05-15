@@ -77,6 +77,13 @@ class _WorkFromHomeScreenState extends State<WorkFromHomeScreen> {
                                 16.0, 0.0, 0.0, 0.0),
                             child: InkWell(
                               onTap: () {
+                                authProviderr.navigationSelection = [];
+                                authProviderr.selectedDeductionList = [];
+                                authProviderr.selectedDeductionForRemovingNone =
+                                    [];
+                                authProviderr.deductionNumber = 0;
+                                authProviderr.slectedJobsIds = [];
+                                authProviderr.notifyListeners();
                                 Navigator.pop(context);
                               },
                               child: Icon(

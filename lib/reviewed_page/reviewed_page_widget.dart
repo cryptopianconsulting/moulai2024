@@ -229,11 +229,14 @@ class _ReviewedPageWidgetState extends State<ReviewedPageWidget> {
                                                                       color: Color(
                                                                           0xFFDBEBFD),
                                                                       fontSize:
-                                                                          17.0,
+                                                                          15.0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold,
                                                                     ),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
                                                               ),
                                                             ),
                                                             // Padding(

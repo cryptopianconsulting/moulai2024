@@ -80,6 +80,12 @@ class _SelectAnualIncomeWidgetState extends State<SelectAnualIncomeWidget> {
                         ),
                         child: InkWell(
                           onTap: () {
+                            authProvider.navigationSelection = [];
+                            authProvider.selectedDeductionList = [];
+                            authProvider.selectedDeductionForRemovingNone = [];
+                            authProvider.deductionNumber = 0;
+                            authProvider.slectedJobsIds = [];
+                            authProvider.notifyListeners();
                             Navigator.pop(context);
                           },
                           child: const Icon(

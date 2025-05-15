@@ -96,6 +96,10 @@ class _SelectPersonalDeductionWidgetState
                                   authProvider
                                       .selectedDeductionForRemovingNone = [];
                                   authProvider.deductionNumber = 0;
+                                  authProvider.slectedJobsIds = [];
+                                  authProvider.jobs = [];
+                                  authProvider.notifyListeners();
+
                                   Navigator.pop(context);
                                 });
                               },

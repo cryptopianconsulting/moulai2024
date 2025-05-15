@@ -275,8 +275,14 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 12.0, 16.0, 12.0),
                               child: IntlPhoneField(
+                                disableLengthCheck: true,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(10),
+                                ],
                                 controller: _model.phoneController,
-                                initialCountryCode: 'US',
+                                initialCountryCode: 'AU',
+                                initialValue: '0',
                                 onChanged: (v) async {
                                   authProvider.phone_number = v.completeNumber;
                                   setState(() {});
@@ -355,13 +361,13 @@ class _SignUpWithEmailWidgetState extends State<SignUpWithEmailWidget> {
                         FocusManager.instance.primaryFocus?.unfocus();
                         if (formKey.currentState!.validate()) {
                           authProvider.email = _model.emailTextController.text;
-                          await authProvider.signUp(context, 0);
-                          // await Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (_) => ConfirmLegalNameWidget(),
-                          //   ),
-                          // );
+                          // await authProvider.signUp(context, 0);
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ConfirmLegalNameWidget(),
+                            ),
+                          );
                           //third screen
                           // context.pushNamedAuth(
                           //   'ConnectBank',

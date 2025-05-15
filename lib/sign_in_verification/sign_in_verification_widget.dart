@@ -129,6 +129,7 @@ class _SignInVerificationWidgetState extends State<SignInVerificationWidget> {
                             0.0, 22.0, 30.0, 0.0),
                         child: PinCodeTextField(
                           appContext: context,
+                          keyboardType: TextInputType.number,
                           length: 6,
                           textStyle: FlutterFlowTheme.of(context)
                               .titleSmall
@@ -239,19 +240,10 @@ class _SignInVerificationWidgetState extends State<SignInVerificationWidget> {
                     );
                   } else if (success == true &&
                       widget.isFromRegister == false) {
-                    bool? hasAccounts = await authProvider.getUserAccounts();
-
-                    if (hasAccounts!) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => DashboardWidget()),
-                      );
-                    } else {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => ConnectBankWidget()),
-                      );
-                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => DashboardWidget()),
+                    );
                   } else {
                     setState(() {
                       authProvider.loading = false;

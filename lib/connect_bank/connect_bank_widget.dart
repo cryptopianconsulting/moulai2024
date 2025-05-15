@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:moulai1/auth/auth_util.dart';
@@ -39,9 +40,12 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((t) {
+      // phoneController.text = FFAppState().prefs.getString('phone') ?? '';
       _model = createModel(context, () => ConnectBankModel());
       final authProviderr = Provider.of<AuthProvider>(context, listen: false);
+      phoneController.text = authProviderr.phone_number;
       repeatCheckBank();
+
       // phoneController.text = FFAppState().prefs.getString('phone') ?? '';
     });
   }
@@ -571,7 +575,12 @@ class _ConnectBankWidgetState extends State<ConnectBankWidget> {
                                     initialValue:
                                         FFAppState().prefs.getString('phone') ??
                                             '',
-                                    initialCountryCode: 'US',
+                                    disableLengthCheck: true,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      LengthLimitingTextInputFormatter(10),
+                                    ],
+                                    initialCountryCode: 'AU',
                                     onChanged: (v) {
                                       authProvider.phone_number =
                                           v.completeNumber;

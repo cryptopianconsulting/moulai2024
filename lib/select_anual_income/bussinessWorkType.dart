@@ -64,6 +64,14 @@ class _BussinessWorkTypeState extends State<BussinessWorkType> {
                     padding: EdgeInsetsDirectional.only(start: 16),
                     child: InkWell(
                       onTap: () async {
+                        authProviderr.navigationSelection = [];
+                        authProviderr.selectedDeductionList = [];
+                        authProviderr.selectedDeductionForRemovingNone = [];
+                        authProviderr.deductionNumber = 0;
+                        authProviderr.slectedJobsIds = [];
+                        authProviderr.selectedDeductionForRemovingNone = [];
+                        authProviderr.selectedDeductionList = [];
+                        authProviderr.notifyListeners();
                         Navigator.pop(context);
                       },
                       child: Icon(
